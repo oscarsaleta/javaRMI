@@ -47,7 +47,7 @@ public class SInv extends JFrame {
 	int nivell = 1;
 	int puntuacio = 0;
 	int live = 3;
-	int hiScore = Ranking.hiscore();
+	int hiScore = 0;
 	int morts = 0;
 
 	int frame = 0;
@@ -71,6 +71,7 @@ public class SInv extends JFrame {
         String host = (args.length < 1) ? null : args[0];
         try {
             Registry registry = LocateRegistry.getRegistry(host);
+            ScoreManager stub = (ScoreManager) registry.lookup("ScoreManager");
         } catch (Exception e) {
             System.err.println("Client exception: " + e.toString());
             e.printStackTrace();
@@ -128,7 +129,7 @@ public class SInv extends JFrame {
 				puntuacio = 0;
 				morts = 0;
 				nivell = 1;
-				hiScore = Ranking.hiscore();
+				hiScore = stub.hiscore();
 				barrera();
 
 				do {

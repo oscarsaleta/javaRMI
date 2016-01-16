@@ -27,6 +27,54 @@ public class Server implements ScoreManager {
         return y;
     }
 
+    public String lecturaRanking(int fila, int columna) throws RemoteException, IOException {
+		File arxiu;
+		FileReader fr;
+		BufferedReader br;
+		String linia;
+		String s = "NULL";
+
+		int contador = 0;
+
+		arxiu = new File("Ranking.txt");
+		fr = new FileReader(arxiu);
+		br = new BufferedReader(fr);
+
+		while ((linia = br.readLine()) != null) {
+			++contador;
+
+			if (contador == fila) {
+				StringTokenizer st = new StringTokenizer(linia);
+
+				switch (columna) {
+				case 1: {
+					s = st.nextToken();
+					return s;
+				}
+
+				case 2: {
+					s = st.nextToken();
+					s = st.nextToken();
+					return s;
+				}
+
+				case 3: {
+					s = st.nextToken();
+					s = st.nextToken();
+					s = st.nextToken();
+					return s;
+				}
+
+				default: {
+					return s;
+				}
+
+				}
+			}
+		}
+		return s;
+    }
+
     public String sayHello() {
         return "Hello, world!";
     }
