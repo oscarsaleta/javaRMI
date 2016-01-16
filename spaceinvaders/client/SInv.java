@@ -48,7 +48,7 @@ public class SInv extends JFrame {
 	int nivell = 1;
 	int puntuacio = 0;
 	int live = 3;
-	int hiScore = 0;
+    int hiScore = 0;
 	int morts = 0;
 
 	int frame = 0;
@@ -67,108 +67,110 @@ public class SInv extends JFrame {
 	Barrera v_barrera_3[] = new Barrera[40];
 	Barrera v_barrera_4[] = new Barrera[40];
 
+
 	public static void main(String[] args) throws IOException {
         
         String host = (args.length < 1) ? null : args[0];
+        new SInv(host);
+        
+	}
+
+	SInv(String host) throws IOException {
+        
         try {
             Registry registry = LocateRegistry.getRegistry(host);
             ScoreManager stub = (ScoreManager) registry.lookup("ScoreManager");
-		    new SInv();
+
+            Menu menu = new Menu(this);
+
+            nau1 = new Nau1(this);
+            nau2 = new Nau2(this);
+
+            GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment()
+                    .getDefaultScreenDevice();
+            if (gd.isFullScreenSupported()) {
+                setUndecorated(true);
+                gd.setFullScreenWindow(this);
+            }
+
+            else {
+                JOptionPane.showMessageDialog(null,
+                        "ERROR: NO es disposa de pantalla completa");
+            }
+
+            getContentPane().setBackground(Color.BLACK);
+
+            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            setSize(PX, PY);
+            setVisible(true);
+            img = createImage(PX, PY);
+            g = img.getGraphics();
+
+            nau2.vida = 1;
+            v_tir.addElement(new Tir(this, 1, nau1.x + PX / 30, nau1.y, 0));
+
+            try {
+                do {
+                    while (Menu.Actiu != 1) {
+                        switch (Menu.Actiu) {
+                        case 0:
+                            menu.menuInici();
+                            break;
+                        case 2:
+                            menu.menuRanking();
+                            break;
+                        }
+                    }
+
+                    inicialitzacio_Naus();
+                    menu.info();
+                    live = 3;
+                    puntuacio = 0;
+                    hiScore = stub.hiScore();
+                    morts = 0;
+                    nivell = 1;
+                    barrera();
+
+                    do {
+                        pintaPuntuacions();
+                        detectaColisions();
+                        calculaMoviments();
+                        pintaNaus();
+                        pintaBarrera();
+                        nouNivell();
+                        mort();
+                        if (conquesta() == 1)
+                            break;
+
+                        nau1.eliminaTir();
+
+                        Thread.sleep(25);
+
+                        FRAME = (30 - (morts / 3)) / nivell;
+                        frame++;
+
+                    } while (live >= 0);
+
+                    g.setColor(Color.white);
+                    g.setFont(g.getFont().deriveFont((float) PX / 10));
+                    g.drawString("GAME OVER", PX / 5, PY / 2);
+                    repaint();
+
+                    Thread.sleep(3000);
+
+                    menu.menuFinal();
+
+                    Thread.sleep(3000);
+                    Menu.Actiu = 0;
+
+                } while (true);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         } catch (Exception e) {
             System.err.println("Client exception: " + e.toString());
             e.printStackTrace();
         }
-        
-	}
-
-	SInv() throws IOException {
-
-		Menu menu = new Menu(this);
-
-		nau1 = new Nau1(this);
-		nau2 = new Nau2(this);
-
-		GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment()
-				.getDefaultScreenDevice();
-		if (gd.isFullScreenSupported()) {
-			setUndecorated(true);
-			gd.setFullScreenWindow(this);
-		}
-
-		else {
-			JOptionPane.showMessageDialog(null,
-					"ERROR: NO es disposa de pantalla completa");
-		}
-
-		getContentPane().setBackground(Color.BLACK);
-
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(PX, PY);
-		setVisible(true);
-		img = createImage(PX, PY);
-		g = img.getGraphics();
-
-		nau2.vida = 1;
-		v_tir.addElement(new Tir(this, 1, nau1.x + PX / 30, nau1.y, 0));
-
-		try {
-			do {
-				while (Menu.Actiu != 1) {
-					switch (Menu.Actiu) {
-					case 0:
-						menu.menuInici();
-						break;
-					case 2:
-						menu.menuRanking();
-						break;
-					}
-				}
-
-				inicialitzacio_Naus();
-				menu.info();
-				live = 3;
-				puntuacio = 0;
-				morts = 0;
-				nivell = 1;
-				hiScore = stub.hiscore();
-				barrera();
-
-				do {
-					pintaPuntuacions();
-					detectaColisions();
-					calculaMoviments();
-					pintaNaus();
-					pintaBarrera();
-					nouNivell();
-					mort();
-					if (conquesta() == 1)
-						break;
-
-					nau1.eliminaTir();
-
-					Thread.sleep(25);
-
-					FRAME = (30 - (morts / 3)) / nivell;
-					frame++;
-
-				} while (live >= 0);
-
-				g.setColor(Color.white);
-				g.setFont(g.getFont().deriveFont((float) PX / 10));
-				g.drawString("GAME OVER", PX / 5, PY / 2);
-				repaint();
-
-				Thread.sleep(3000);
-
-				menu.menuFinal();
-
-				Thread.sleep(3000);
-				Menu.Actiu = 0;
-
-			} while (true);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 
 	}
 
