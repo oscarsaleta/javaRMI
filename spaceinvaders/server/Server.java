@@ -1,13 +1,30 @@
 package spaceinvaders.server;
 
-import java.rmi.registry.Registry;
-import java.rmi.registry.LocateRegistry;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.StringTokenizer;
+
+import spaceinvaders.interfaces;
 
 public class Server implements ScoreManager {
 
     public Server() {}
+
+    public int hiScore() throws RemoteException {
+        String linia1 = null;
+        File arxiu = new File("Ranking.txt");
+        BufferedReader br = new BufferedReader(new FileReader(arxiu));
+        linia1 = br.readLine();
+        StringTokenizer st = new StringTokenizer(linia1);
+        String s = st.nextToken();
+        int y = Integer.parseInt(s);
+        return y;
+    }
 
     public String sayHello() {
         return "Hello, world!";
@@ -17,12 +34,11 @@ public class Server implements ScoreManager {
 
         try {
             Server obj = new Server();
-            Hello stub = (Hello) UnicastRemoteObject.exportObject(obj, 0);
+            ScoreManager stub = (ScoreManager) UnicastRemoteObject.exportObject(obj, 0);
 
             // Bind the remote object's stub in the registry
             Registry registry = LocateRegistry.getRegistry();
-            //System.setProperty("java.rmi.server.hostname","192.168.1.1");
-            registry.bind("Hello", stub);
+            registry.bind("ScoreManager", stub);
 
             System.err.println("Server ready");
         } catch (Exception e) {
