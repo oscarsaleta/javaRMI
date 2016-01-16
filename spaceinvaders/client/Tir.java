@@ -1,6 +1,10 @@
+package spaceinvaders.client;
+
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+
+import spaceinvaders.client.SInv;
 
 /**
  * @author Jaume Muntsant

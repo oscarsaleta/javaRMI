@@ -1,4 +1,8 @@
+package spaceinvaders.client;
+
 import java.io.IOException;
+
+import spaceinvaders.client.Nau;
 
 /**
  * @author Jaume Muntsant (1271258)

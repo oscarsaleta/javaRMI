@@ -1,3 +1,5 @@
+package spaceinvaders.client;
+
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -6,6 +8,9 @@ import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JTextField;
+
+import spaceinvaders.client.SInv;
+import spaceinvaders.client.Ranking;
 
 /**
  * @author Jaume Muntsant (1271258)

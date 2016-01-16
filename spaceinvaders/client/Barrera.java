@@ -1,4 +1,8 @@
+package spaceinvaders.client;
+
 import java.awt.Color;
+
+import spaceinvaders.client.SInv;
 
 /**
  * @author Jaume Muntsant (1271258)

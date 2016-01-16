@@ -1,4 +1,9 @@
+package spaceinvaders.client;
+
 import java.awt.Graphics;
+
+import spaceinvaders.client.Nau;
+import spaceinvaders.client.SInv;
 
 /**
  * @author Jaume Muntsant (1271258)

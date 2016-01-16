@@ -18,6 +18,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
 import spaceinvaders.interfaces.ScoreManager;
+import spaceinvaders.client.*;
 
 /**
  * @author Jaume Muntsant (1271258)
@@ -72,12 +73,12 @@ public class SInv extends JFrame {
         try {
             Registry registry = LocateRegistry.getRegistry(host);
             ScoreManager stub = (ScoreManager) registry.lookup("ScoreManager");
+		    new SInv();
         } catch (Exception e) {
             System.err.println("Client exception: " + e.toString());
             e.printStackTrace();
         }
         
-		new SInv();
 	}
 
 	SInv() throws IOException {

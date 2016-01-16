@@ -1,6 +1,11 @@
+package spaceinvaders.client;
+
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+
+import spaceinvaders.client.Nau;
+import spaceinvaders.client.SInv;
 
 /**
  * @author Jaume Muntsant (1271258)
