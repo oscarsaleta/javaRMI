@@ -3,21 +3,22 @@ package spaceinvaders.server;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.StringTokenizer;
 
-import spaceinvaders.interfaces;
+import spaceinvaders.interfaces.ScoreManager;
 
 public class Server implements ScoreManager {
 
     public Server() {}
 
-    public int hiScore() throws RemoteException {
+    public int hiScore() throws RemoteException, IOException {
         String linia1 = null;
-        File arxiu = new File("Ranking.txt");
+        File arxiu = new File("spaceinvaders/server/Ranking.txt");
         BufferedReader br = new BufferedReader(new FileReader(arxiu));
         linia1 = br.readLine();
         StringTokenizer st = new StringTokenizer(linia1);
