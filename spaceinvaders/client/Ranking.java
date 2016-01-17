@@ -87,7 +87,7 @@ public class Ranking {
 
 		String linia1 = null;
 
-		File arxiu = new File("Ranking.txt");
+		File arxiu = new File("spaceinvaders/server/Ranking.txt");
 		FileReader fr = new FileReader(arxiu);
 		BufferedReader br = new BufferedReader(fr);
 

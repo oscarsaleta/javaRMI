@@ -81,7 +81,7 @@ public class SInv extends JFrame {
             Registry registry = LocateRegistry.getRegistry(host);
             ScoreManager stub = (ScoreManager) registry.lookup("ScoreManager");
 
-            Menu menu = new Menu(this);
+            Menu menu = new Menu(this,stub);
 
             nau1 = new Nau1(this);
             nau2 = new Nau2(this);

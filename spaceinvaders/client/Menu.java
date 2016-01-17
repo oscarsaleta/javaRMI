@@ -11,6 +11,7 @@ import javax.swing.JTextField;
 
 import spaceinvaders.client.SInv;
 import spaceinvaders.client.Ranking;
+import spaceinvaders.interfaces.ScoreManager;
 
 /**
  * @author Jaume Muntsant (1271258)
@@ -21,6 +22,7 @@ public class Menu implements ActionListener {
 	SInv f;
 	Ranking r;
 	JTextField jtf;
+    ScoreManager stub;
 
 	JButton b1 = new JButton("Iniciar");
 	JButton b2 = new JButton("Ranking");
@@ -29,8 +31,9 @@ public class Menu implements ActionListener {
 
 	static int Actiu = 0;
 
-	public Menu(SInv f) throws IOException {
+	public Menu(SInv f, ScoreManager stub) throws IOException {
 		this.f = f;
+        this.stub = stub;
 	}
 
 	/**
@@ -115,21 +118,21 @@ public class Menu implements ActionListener {
 					if (i == r.posicioRanking())
 						f.g.setColor(Color.yellow);
 					f.g.setFont(f.g.getFont().deriveFont((float) f.PY / 15));
-					f.g.drawString(+i + " " + r.lecturaRanking(i, j), f.PX / 20
+					f.g.drawString(+i + " " + stub.lecturaRanking(i, j), f.PX / 20
 							+ (j - 1) * f.PX / 7, f.PY / 4 + i * f.PY / 15);
 				} else if (i == 2 || i == 3) {
 					f.g.setColor(Color.blue);
 					if (i == r.posicioRanking())
 						f.g.setColor(Color.yellow);
 					f.g.setFont(f.g.getFont().deriveFont((float) f.PY / 15));
-					f.g.drawString(+i + " " + r.lecturaRanking(i, j), f.PX / 20
+					f.g.drawString(+i + " " + stub.lecturaRanking(i, j), f.PX / 20
 							+ (j - 1) * f.PX / 7, f.PY / 4 + i * f.PY / 15);
 				} else {
 					f.g.setColor(Color.white);
 					if (i == r.posicioRanking())
 						f.g.setColor(Color.yellow);
 					f.g.setFont(f.g.getFont().deriveFont((float) f.PY / 15));
-					f.g.drawString(+i + " " + r.lecturaRanking(i, j), f.PX / 20
+					f.g.drawString(+i + " " + stub.lecturaRanking(i, j), f.PX / 20
 							+ (j - 1) * f.PX / 10, f.PY / 4 + f.PX / 100 + i
 							* f.PY / 15);
 				}
