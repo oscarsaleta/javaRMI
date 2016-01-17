@@ -7,6 +7,6 @@ import java.rmi.RemoteException;
 public interface ScoreManager extends Remote {
     int hiScore() throws RemoteException, IOException;
     String lecturaRanking(int fila, int columna) throws RemoteException, IOException;
-    void esripturaRanking(int puntuacio) throws IOException;
+    void esripturaRanking(int puntuacio) throws RemoteException, IOException;
 }
 

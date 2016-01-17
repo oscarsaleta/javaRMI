@@ -29,7 +29,7 @@ public class Server implements ScoreManager {
         return y;
     }
     
-    public void esripturaRanking(int puntuacio) throws IOException {
+    public void esripturaRanking(int puntuacio) throws RemoteException, IOException {
         int posR = 50;
 		String linia1 = null;
 		File arxiu = new File("spaceinvaders/server/Ranking.txt");
