@@ -36,7 +36,7 @@ public class Server implements ScoreManager {
 
 		int contador = 0;
 
-		arxiu = new File("Ranking.txt");
+		arxiu = new File("spaceinvaders/server/Ranking.txt");
 		fr = new FileReader(arxiu);
 		br = new BufferedReader(fr);
 
