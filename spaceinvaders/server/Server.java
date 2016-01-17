@@ -1,8 +1,10 @@
 package spaceinvaders.server;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -26,6 +28,41 @@ public class Server implements ScoreManager {
         int y = Integer.parseInt(s);
         return y;
     }
+    
+    public void esripturaRanking(int puntuacio) throws IOException {
+        int posR = 50;
+		String linia1 = null;
+		File arxiu = new File("spaceinvaders/server/Ranking.txt");
+		FileReader fr = new FileReader(arxiu);
+		BufferedReader br = new BufferedReader(fr);
+		int punts[] = new int[11];
+		for (int i = 0; i < punts.length - 1; i++) {
+			linia1 = br.readLine();
+			StringTokenizer st = new StringTokenizer(linia1);
+			String s = st.nextToken();
+			int y = Integer.parseInt(s);
+			punts[i] = y;
+		}
+		punts[10] = 0;
+		for (int i = 0; i < punts.length; i++) {
+			if (puntuacio >= punts[i]) {
+				for (int j = 9; j >= i; j--) {
+					punts[j + 1] = punts[j];
+				}
+				posR = i;
+				punts[i] = puntuacio;
+				break;
+			}
+		}
+		FileWriter fw = new FileWriter(arxiu);
+		BufferedWriter bw = new BufferedWriter(fw);
+		for (int i = 0; i < punts.length - 1; i++) {
+			Integer a = new Integer(punts[i]);
+			bw.append(a.toString());
+			bw.flush();
+			bw.newLine();
+		}
+	}
 
     public String lecturaRanking(int fila, int columna) throws RemoteException, IOException {
 		File arxiu;
