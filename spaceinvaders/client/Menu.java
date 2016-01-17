@@ -108,7 +108,7 @@ public class Menu implements ActionListener {
 		f.g.setColor(Color.green);
 		f.g.setFont(f.g.getFont().deriveFont(72.0f));
 		f.g.drawString("Ranking", f.PX / 4, f.PY / 10);
-		//r = new Ranking(f);
+		r = new Ranking(f);
 
 		for (int i = 1; i <= 10; i++) {
 			for (int j = 1; j <= 1; j++) {
