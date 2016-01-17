@@ -390,9 +390,9 @@ public class SInv extends JFrame {
 
 				for (int j = 0; j < v_nau.length; j++) {
 					if (v_tir.get(i).x >= v_nau[j].x
-							&& v_tir.get(i).x <= v_nau[j].x + PX / 20) {
+							&& v_tir.get(i).x <= v_nau[j].x + PX / 18) {
 						if (v_tir.get(i).y >= v_nau[j].y
-								&& v_tir.get(i).y <= v_nau[j].y + PY / 20) {
+								&& v_tir.get(i).y <= v_nau[j].y + PY / 18) {
 							v_nau[j].vida = 0;
 							this.g.drawImage(imgMort, v_nau[j].x, v_nau[j].y,
 									PX / 20, PY / 20, null);
