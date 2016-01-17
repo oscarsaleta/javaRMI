@@ -85,6 +85,8 @@ public class Nau1 extends Nau implements KeyListener {
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT
 				|| e.getKeyCode() == KeyEvent.VK_D)
 			keydreta = true;
+        if (e.getKeyCode() == KeyEvent.VK_M)
+            f.live = -1;
 	}
 
 	@Override
